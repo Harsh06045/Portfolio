@@ -33,7 +33,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#141414] border-2 border-[#D7E2EA]/30 rounded-[32px] p-6 sm:p-8 max-w-lg w-full text-[#D7E2EA] shadow-2xl relative"
+            className="bg-[#141414] border-2 border-[#D7E2EA]/30 rounded-[28px] sm:rounded-[32px] p-5 sm:p-8 max-w-lg w-full text-[#D7E2EA] shadow-2xl relative max-h-[90dvh] overflow-y-auto"
           >
             {/* Close Button */}
             <button

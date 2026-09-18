@@ -162,7 +162,7 @@ const row2Tripled = [...row2Items, ...row2Items, ...row2Items];
 const MarqueeCard = ({ item }: { item: MarqueeCardItem }) => {
   const CardContent = (
     <div
-      className={`w-[360px] sm:w-[420px] md:w-[460px] h-[240px] sm:h-[265px] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D7E2EA]/15 hover:border-[#D7E2EA]/40 bg-[#141414] flex-shrink-0 relative group transition-all duration-300 shadow-xl select-none ${
+      className={`w-[290px] xs:w-[330px] sm:w-[400px] md:w-[460px] h-[220px] sm:h-[255px] md:h-[265px] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#D7E2EA]/15 hover:border-[#D7E2EA]/40 bg-[#141414] flex-shrink-0 relative group transition-all duration-300 shadow-xl select-none ${
         item.link ? 'cursor-pointer' : ''
       }`}
     >

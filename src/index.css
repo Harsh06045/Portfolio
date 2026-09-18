@@ -14,19 +14,25 @@ html {
   background: #0C0C0C;
   font-family: 'Kanit', sans-serif;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: #0C0C0C;
   font-family: 'Kanit', sans-serif;
-  overflow-x: clip;
+  overflow-x: hidden;
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #root {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .hero-heading {
@@ -34,4 +40,195 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Hide scrollbar for clean aesthetics where desired */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+:root {
+  --ratio-x: 0;
+  --ratio-y: 0;
+  --correction: 0%;
+  --labs-sys-color-surface: #444;
+  --labs-sys-color-on-surface: hsl(0, 100%, 0%);
+  --labs-sys-color-background: black;
+  --labs-sys-radius-surface: 2rem;
+  --c1: #ddb4eb;
+}
+
+.holo-card {
+  --ratio-x: 0;
+  --ratio-y: 0;
+  --correction: 0%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.holo-bg {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0;
+  background: radial-gradient(
+      ellipse at calc(85% - var(--ratio-x) * 20%) calc(15% - var(--ratio-y) * 20%),
+      rgba(215, 226, 234, 0.35) 0%,
+      rgba(182, 0, 168, 0.25) 25%,
+      rgba(118, 33, 176, 0.2) 50%,
+      transparent 70%
+    ),
+    linear-gradient(
+      125deg,
+      rgba(182, 0, 168, 0.15) calc(10% - var(--ratio-x) * 15%),
+      rgba(118, 33, 176, 0.2) calc(35% - var(--ratio-x) * 15%),
+      rgba(190, 76, 0, 0.15) calc(60% - var(--ratio-x) * 15%),
+      rgba(187, 204, 215, 0.2) calc(85% - var(--ratio-x) * 15%),
+      transparent calc(100% - var(--ratio-x) * 15%)
+    );
+  transition: opacity 0.35s ease;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.holo-lines {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    125deg,
+    rgba(215, 226, 234, 0.25) calc(15% - var(--ratio-x) * 15%),
+    rgba(182, 0, 168, 0.3) calc(40% - var(--ratio-x) * 15%),
+    rgba(118, 33, 176, 0.25) calc(65% - var(--ratio-x) * 15%),
+    transparent calc(85% - var(--ratio-x) * 15%)
+  );
+  opacity: 0.22;
+  transition: opacity 0.35s ease;
+  z-index: 6;
+}
+
+.circles {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.06;
+  transition: opacity 0.35s ease;
+  z-index: 4;
+  background-image: radial-gradient(rgba(215, 226, 234, 0.3) 1px, transparent 1px);
+  background-size: 1.25rem 1.25rem;
+}
+
+.holo-card:hover .holo-bg {
+  opacity: 0.45;
+}
+
+.holo-card:hover .holo-lines {
+  opacity: 0.4;
+}
+
+.holo-card:hover .circles {
+  opacity: 0.18;
+}
+
+/* Card Stack Shuffle Transitions - 60fps GPU Hardware Accelerated */
+@keyframes card-out {
+  0% {
+    z-index: 35;
+    transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
+    opacity: 1;
+  }
+  38% {
+    transform: translate3d(-14px, -75%, 0) rotate(-3.5deg) scale(1.01);
+    z-index: 35;
+    opacity: 0.98;
+  }
+  50% {
+    z-index: 4;
+  }
+  100% {
+    transform: translate3d(14px, -22px, 0) rotate(3.5deg) scale(0.96);
+    z-index: 4;
+    opacity: 0.82;
+  }
+}
+
+@media (min-width: 640px) {
+  @keyframes card-out {
+    0% {
+      z-index: 35;
+      transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
+      opacity: 1;
+    }
+    38% {
+      transform: translate3d(-24px, -82%, 0) rotate(-5deg) scale(1.02);
+      z-index: 35;
+      opacity: 0.98;
+    }
+    50% {
+      z-index: 4;
+    }
+    100% {
+      transform: translate3d(36px, -40px, 0) rotate(7deg) scale(0.95);
+      z-index: 4;
+      opacity: 0.82;
+    }
+  }
+}
+
+.shuffle-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform-origin: center center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.45s ease;
+  user-select: none;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.shuffle-card--current {
+  position: relative;
+  z-index: 25;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(-0.5deg) scale(1);
+}
+
+.shuffle-card--next {
+  z-index: 15;
+  opacity: 0.92;
+  transform: translate3d(8px, -12px, 0) rotate(2deg) scale(0.98);
+}
+
+.shuffle-card--back {
+  z-index: 5;
+  opacity: 0.82;
+  transform: translate3d(14px, -22px, 0) rotate(3.5deg) scale(0.96);
+}
+
+@media (min-width: 640px) {
+  .shuffle-card--current {
+    transform: translate3d(0, 0, 0) rotate(-1deg) scale(1);
+  }
+  .shuffle-card--next {
+    transform: translate3d(18px, -20px, 0) rotate(3.5deg) scale(0.98);
+  }
+  .shuffle-card--back {
+    transform: translate3d(36px, -40px, 0) rotate(7deg) scale(0.95);
+  }
+}
+
+.shuffle-card--out {
+  animation: card-out 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: none;
 }

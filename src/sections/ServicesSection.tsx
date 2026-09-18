@@ -44,20 +44,25 @@ const ServicesSection = () => {
   return (
     <section
       id="services"
-      className="bg-white rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 relative z-20"
+      className="bg-white rounded-t-[32px] sm:rounded-t-[50px] md:rounded-t-[60px] px-4 sm:px-8 md:px-10 py-16 sm:py-24 md:py-32 relative z-20 overflow-hidden"
     >
-      <h2
-        className="text-[#0C0C0C] font-black uppercase text-center mb-16 sm:mb-20 md:mb-28"
-        style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
-      >
-        Services
-      </h2>
+      <div className="text-center mb-12 sm:mb-20 md:mb-24">
+        <span className="text-xs uppercase tracking-widest text-[#0C0C0C]/50 font-bold block mb-2">
+          Capabilities &amp; Specializations
+        </span>
+        <h2
+          className="text-[#0C0C0C] font-black uppercase text-center leading-none tracking-tight"
+          style={{ fontSize: 'clamp(2.5rem, 10vw, 150px)' }}
+        >
+          Services
+        </h2>
+      </div>
 
       <div className="max-w-5xl mx-auto">
         {services.map((service, i) => (
-          <FadeIn key={service.number} delay={i * 0.1} y={30}>
+          <FadeIn key={service.number} delay={i * 0.1} y={25}>
             <div
-              className="flex items-start gap-6 sm:gap-8 md:gap-12 py-8 sm:py-10 md:py-12"
+              className="flex items-start gap-4 sm:gap-8 md:gap-12 py-6 sm:py-10 md:py-12"
               style={{
                 borderBottom: '1px solid rgba(12, 12, 12, 0.15)',
                 ...(i === 0 ? { borderTop: '1px solid rgba(12, 12, 12, 0.15)' } : {}),
@@ -65,20 +70,20 @@ const ServicesSection = () => {
             >
               <span
                 className="font-black text-[#0C0C0C] leading-none flex-shrink-0"
-                style={{ fontSize: 'clamp(3rem, 10vw, 140px)' }}
+                style={{ fontSize: 'clamp(2rem, 7vw, 120px)' }}
               >
                 {service.number}
               </span>
-              <div className="flex flex-col gap-2 sm:gap-3 pt-2 sm:pt-4 md:pt-6">
+              <div className="flex flex-col gap-1.5 sm:gap-3 pt-1 sm:pt-3 md:pt-4">
                 <h3
-                  className="font-medium uppercase text-[#0C0C0C]"
-                  style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
+                  className="font-bold uppercase text-[#0C0C0C]"
+                  style={{ fontSize: 'clamp(1.05rem, 2.2vw, 2.1rem)' }}
                 >
                   {service.name}
                 </h3>
                 <p
-                  className="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-60"
-                  style={{ fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)' }}
+                  className="font-light leading-relaxed max-w-2xl text-[#0C0C0C] opacity-70"
+                  style={{ fontSize: 'clamp(0.85rem, 1.5vw, 1.2rem)' }}
                 >
                   {service.description}
                 </p>
@@ -86,22 +91,25 @@ const ServicesSection = () => {
             </div>
           </FadeIn>
         ))}
+
         {/* Technical Skills & Certifications Matrix */}
-        <div id="skills" className="mt-16 sm:mt-20 pt-10 border-t border-[#0C0C0C]/10">
-          <div className="text-center mb-10">
-            <span className="text-xs uppercase tracking-widest text-[#0C0C0C]/50 font-bold">Comprehensive Stack</span>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase text-[#0C0C0C] mt-2">
+        <div id="skills" className="mt-14 sm:mt-20 pt-10 border-t border-[#0C0C0C]/10">
+          <div className="text-center mb-8 sm:mb-10">
+            <span className="text-xs uppercase tracking-widest text-[#0C0C0C]/50 font-bold">
+              Comprehensive Stack
+            </span>
+            <h3 className="text-xl sm:text-3xl md:text-4xl font-black uppercase text-[#0C0C0C] mt-2">
               Skills &amp; Certifications
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-10 sm:mb-12">
             {skillCategories.map((group) => (
-              <div key={group.category} className="bg-[#F4F6F8] rounded-2xl p-5 border border-[#0C0C0C]/10">
-                <div className="text-xs font-bold uppercase tracking-wider text-[#0C0C0C]/60 mb-3">
+              <div key={group.category} className="bg-[#F4F6F8] rounded-2xl p-4 sm:p-5 border border-[#0C0C0C]/10">
+                <div className="text-xs font-bold uppercase tracking-wider text-[#0C0C0C]/60 mb-2.5 sm:mb-3">
                   {group.category}
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {group.items.map((item) => (
                     <span
                       key={item}
@@ -116,14 +124,14 @@ const ServicesSection = () => {
           </div>
 
           {/* Certifications Banner */}
-          <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-3xl p-6 sm:p-8">
-            <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
+          <div className="bg-[#0C0C0C] text-[#D7E2EA] rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+            <div className="flex items-center justify-between flex-wrap gap-2 mb-4">
               <span className="text-xs font-semibold uppercase tracking-widest text-[#BBCCD7]">
                 Validated Competencies
               </span>
               <span className="text-xs text-white/50">NPTEL • AWS • Imarticus • MongoDB</span>
             </div>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2.5">
               {[
                 'DBMS — NPTEL',
                 'OOP — NPTEL',
@@ -135,7 +143,7 @@ const ServicesSection = () => {
               ].map((cert) => (
                 <span
                   key={cert}
-                  className="text-xs sm:text-sm px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/90"
+                  className="text-xs sm:text-sm px-3 py-1.5 rounded-full bg-white/10 border border-white/15 text-white/90 break-words"
                 >
                   ✓ {cert}
                 </span>
